@@ -34,11 +34,13 @@ const assessments = [
 
   <h2>Welcome to Meridian</h2>
   <p>
-    You live in a city where an AI system called CivOp already runs the
-    services you depend on. It works, mostly. When it doesn't, that's your
-    problem to solve — and, this semester, your assignment. You'll learn to
-    read the systems that govern a resident's ordinary day, build and test a
-    response when one of them fails, and argue — with evidence, not
+    You live in a city where an AI system called CivOp — Civic Operations,
+    Meridian's governing administrative platform — already runs the services
+    you depend on: power, water, food allocation, housing maintenance, all of
+    it. Most days you don't notice. On the days you do, the failure is yours
+    to solve — and, this semester, yours to study. Across twelve weeks you'll
+    learn to read the systems that shape a resident's ordinary day, build and
+    test a response when one of them fails, and argue — with evidence, not
     slogans — for what should happen next.
   </p>
 
@@ -52,11 +54,13 @@ const assessments = [
 
   <h2>The story runs backwards. The calendar doesn't.</h2>
   <p>
-    Each week has two dates: the real Monday you attend, and where the story
-    sits in Meridian's timeline. The story moves from a settled future,
+    That case-by-case work unfolds inside a story told out of order, so it's
+    worth knowing the shape of it before the schedule stops making sense. Each
+    week has two dates: the real Monday you attend, and where the story sits
+    in Meridian's timeline. The story itself moves from a settled future,
     backwards to the moment of takeover, then forward into the present day.
-    <strong>The teaching calendar only ever moves forward</strong> — this
-    timeline is a narrative device, not a schedule.
+    <strong>The teaching calendar only ever moves forward</strong> — the
+    timeline below is a narrative device, not a schedule.
   </p>
   <ol class="story-timeline" aria-label="Story-time progression, separate from the teaching calendar">
     {timeline.map((stage) => (
@@ -69,8 +73,9 @@ const assessments = [
   </ol>
 
   <h2>What you will learn</h2>
+  <p>By the time the story catches up with itself in week 12, you should be able to:</p>
   <ol class="los">
-    <li>Distinguish verified evidence, plausible extrapolation, and invented fiction when evaluating claims about AI systems.</li>
+    <li>Distinguish verified evidence, plausible extrapolation, and invented fiction in claims about AI systems — Meridian's, and the real ones.</li>
     <li>Explain how incremental technical and policy decisions shift power and dependency between residents, institutions, and an AI governance system.</li>
     <li>Develop and test a feasible personal or community response to resource denial or automated-service failure.</li>
     <li>Evaluate a proposed institutional intervention against feasibility, fairness, and unintended consequences.</li>
@@ -78,6 +83,7 @@ const assessments = [
   </ol>
 
   <h3>Assessment overview</h3>
+  <p>Three assessments mark that progress, each one extending the same case file rather than starting over:</p>
   <table class="assessment-overview">
     <thead>
       <tr><th scope="col">Assessment</th><th scope="col">Weight</th><th scope="col">Due</th></tr>
@@ -89,11 +95,12 @@ const assessments = [
     </tbody>
   </table>
   <p class="assessment-note">
-    Full assessment briefs are being finalised; the deliverables, dates and
-    marking criteria above are confirmed.
+    Full assessment briefs are still being finalised; the deliverables,
+    weights and due dates above are already locked in.
   </p>
 
   <h2>Where to go next</h2>
+  <p>Three places to go from here, depending what you need:</p>
   <CardGrid columns={2}>
     <Card title={sessionLabels.plural} href="/sessions/">
       <p>The twelve-week schedule — teaching dates and story eras, side by side.</p>

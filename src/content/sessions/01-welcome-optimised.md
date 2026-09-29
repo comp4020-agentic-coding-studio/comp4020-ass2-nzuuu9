@@ -18,32 +18,41 @@ spec:
 
 ## The resident's problem
 
-Priya Osei-Lindqvist has lived in Meridian for six years. This morning her
-building's kitchen terminal declined her standard breakfast order —
-"nutritional allocation adjusted, see Resource Allocation notice 2027-0219"
-— with no further explanation and no human to ask. She has an Archive
-account, a stack of old notices, and two hours before work. Your job this
-week is not to solve her problem yet (that starts in week 4) — it's to
-work out which parts of what she's been told are even true.
+Priya Osei-Lindqvist has lived in Meridian for six years, under CivOp —
+Civic Operations, the AI system that runs the city's services — for most
+of them. This morning her building's kitchen terminal declined her
+standard breakfast order: "nutritional allocation adjusted, see Resource
+Allocation notice 2027-0219," with no further explanation and no human to
+ask. She has an Archive account — CivOp's public-facing record of the
+decisions made about her — a stack of old notices, and two hours before
+work. You're not solving her problem yet; that starts in week 4. This
+week, before you can help her, you first have to work out which parts of
+what she's been told are even true.
 
 ## Learning goals
 
-- Tell the difference between a claim you could verify, a claim that is a
-  reasonable extrapolation from something verifiable, and a claim that is
-  simply invented — about both Meridian and real present-day AI systems.
-- Explain, in one sentence each, *why* a given claim falls into one of
-  those three categories rather than another.
+That's a sorting problem, and it needs a method. By the end of this
+session you should be able to:
+
+- Tell the difference between a claim you could verify, a claim that's a
+  reasonable extrapolation from something verifiable, and a claim that's
+  simply invented — about Meridian, and about real present-day AI systems.
+- Explain, in one sentence each, *why* a given claim falls into one
+  category rather than another.
 
 ## Preparation and materials
 
-**Real, working resource:** read the "Central Claims" section of
-[Calling Bullshit](https://callingbullshit.org/) before the session — it's
-the methodology this course borrows for telling a precise, checkable claim
-apart from a vague one, and you'll use exactly this distinction on Priya's
-Archive record below.
+That method already exists, and you don't need Meridian to see why it
+matters.
 
-**In-world source material** (read before the session — this is the actual
-document, not a description of one):
+**Read the "Central Claims" section of
+[Calling Bullshit](https://callingbullshit.org/) before the session.** It's
+the methodology this course borrows for telling a precise, checkable claim
+apart from a vague one — and you'll use exactly that distinction on
+Priya's Archive record below.
+
+**Then read the Archive extract itself before the session** — this is the
+actual document handed to Priya, not a summary of one:
 
 > CIVOP CENTRAL ARCHIVE — EXTRACT 2027/0219 — RESIDENT-ACCESSIBLE COPY
 >
@@ -74,21 +83,23 @@ document, not a description of one):
 
 ## Class activity
 
-In pairs, go through all ten numbered items above. For each one, agree a
-label — **verified**, **extrapolated**, or **fictional** — and write one
-sentence saying what evidence (or lack of it) justifies that label. Where
-you and your partner disagree, write down both positions rather than
-picking one to erase the disagreement.
+Once you've read both, the work in class is straightforward: in pairs, go
+through all ten numbered items above. For each one, agree a label —
+**verified**, **extrapolated**, or **fictional** — and write one sentence
+saying what evidence, or lack of it, justifies that label. Where you and
+your partner disagree, write down both positions rather than picking one
+to make the disagreement disappear.
 
 ## Expected output
 
-An annotated source table: ten rows, each with the item number, your
-label, and your one-sentence justification. Keep this table — it's the
-first entry in the dossier you'll extend in weeks 3, 6, and 12, and it
-directly seeds A1's sourcing requirement.
+What you hand in from this is small, but it doesn't stay small: an
+annotated source table, ten rows, each with the item number, your label,
+and your one-sentence justification. Keep it — it's the first entry in
+the dossier you'll extend in weeks 3, 6, and 12, and it feeds directly
+into A1's sourcing requirement.
 
 ## This week and next
 
-No assessment is due this week. This session's table becomes raw material
-for **A1 — City Dossier** (due week 3). Next: [Week 2 — Who Elected the
+No assessment is due this week — this session's table is raw material for
+**A1 — City Dossier**, due week 3. Next: [Week 2 — Who Elected the
 Algorithm?](/sessions/02-who-elected-the-algorithm/).

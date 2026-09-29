@@ -1,0 +1,120 @@
+---
+interface Props {
+  /** Only week 1's route passes true; every other week renders the slot untouched. */
+  active?: boolean;
+  /** Full text of the in-world system notice. Always rendered in full — the
+   *  typewriter effect (if it runs at all) is a visual replay on top of it. */
+  notice?: string;
+}
+
+const { active = false, notice = "" } = Astro.props;
+---
+
+{
+  active ? (
+    <div class="week1-immersion" data-theme="dark">
+      <div class="civop-notice-panel">
+        <p class="civop-notice" id="civop-notice">
+          {notice}
+        </p>
+        <button type="button" class="civop-skip" id="civop-skip" hidden>
+          Skip animation
+        </button>
+      </div>
+      <div class="week1-immersion-body">
+        <slot />
+      </div>
+    </div>
+  ) : (
+    <slot />
+  )
+}
+
+<style>
+  .week1-immersion {
+    background: var(--at-bg);
+    color: var(--at-text);
+    border: 1px solid var(--at-border);
+    border-radius: var(--at-border-radius);
+    padding: var(--at-spacing-lg);
+    margin-block: var(--at-spacing-lg) 0;
+  }
+
+  .civop-notice-panel {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: var(--at-spacing-md);
+    padding-bottom: var(--at-spacing-md);
+    margin-bottom: var(--at-spacing-lg);
+    border-bottom: 1px solid var(--at-border);
+  }
+
+  .civop-notice {
+    margin: 0;
+    font-family: var(--at-font-mono);
+    font-size: var(--at-font-size-sm);
+    letter-spacing: 0.02em;
+    color: var(--at-text-secondary);
+  }
+
+  .civop-skip {
+    font-family: var(--at-font-mono);
+    font-size: var(--at-font-size-xs);
+    color: var(--at-text);
+    background: var(--at-bg-alt);
+    border: 1px solid var(--at-border);
+    border-radius: var(--at-border-radius);
+    padding: 0.25rem 0.6rem;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .civop-skip:hover {
+    background: var(--at-bg-elevated);
+  }
+</style>
+
+<script>
+  const notice = document.getElementById("civop-notice");
+  const skipButton = document.getElementById("civop-skip");
+  if (notice) {
+    const fullText = notice.textContent ?? "";
+    const seenKey = "week1-notice-seen";
+    const alreadySeen = sessionStorage.getItem(seenKey) === "1";
+    const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (alreadySeen || reducedMotion || !fullText) {
+      sessionStorage.setItem(seenKey, "1");
+    } else {
+      sessionStorage.setItem(seenKey, "1");
+
+      // Lock the box height before clearing the text so revealing it back
+      // character-by-character never shifts surrounding layout.
+      notice.style.minHeight = `${notice.getBoundingClientRect().height}px`;
+      // A static label means assistive tech announces the full notice once,
+      // rather than reading each intermediate, partial string as it types.
+      notice.setAttribute("aria-label", fullText);
+      notice.textContent = "";
+
+      if (skipButton) {
+        skipButton.hidden = false;
+      }
+
+      let index = 0;
+      const charsPerTick = 2;
+      const finish = () => {
+        clearInterval(timer);
+        notice.textContent = fullText;
+        if (skipButton) skipButton.hidden = true;
+      };
+      const timer = setInterval(() => {
+        index += charsPerTick;
+        notice.textContent = fullText.slice(0, index);
+        if (index >= fullText.length) finish();
+      }, 20);
+
+      skipButton?.addEventListener("click", finish);
+    }
+  }
+</script>

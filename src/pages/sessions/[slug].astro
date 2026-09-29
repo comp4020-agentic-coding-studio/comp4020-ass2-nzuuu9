@@ -5,6 +5,7 @@ import RelatedContent from "astro-course-university/components/RelatedContent.as
 import SpecList from "astro-course-university/components/SpecList.astro";
 import ContentLayout from "astro-theme-university/layouts/ContentLayout.astro";
 import TeachingTeam from "../../components/TeachingTeam.astro";
+import Week1Immersion from "../../components/Week1Immersion.astro";
 import { formatCourseDate } from "../../lib/dates";
 import { graphCollections, sessionLabels, siteConfig } from "../../site-config";
 
@@ -15,6 +16,10 @@ export async function getStaticPaths() {
 
 const { session } = Astro.props;
 const { Content } = await render(session);
+
+const isWeek1 = session.id === "01-welcome-optimised";
+const civopNotice =
+  "CIVOP CENTRAL — AUTOMATED NOTICE. Access to Archive extract 2027/0219 has been granted for instructional purposes. Your reading time is being recorded, as it always is.";
 ---
 
 <ContentLayout
@@ -22,12 +27,14 @@ const { Content } = await render(session);
   description={session.data.description}
   {...siteConfig}
 >
-  <p><strong>{formatCourseDate(session.data.date)}</strong></p>
-  <Content />
-  <SpecList spec={session.data.spec}>
-    What you bring to the session. Written so a reader can tell whether it has
-    been met without asking you.
-  </SpecList>
-  <TeachingTeam teachers={session.data.teachers} />
-  <RelatedContent entry={session} collections={graphCollections} />
+  <Week1Immersion active={isWeek1} notice={civopNotice}>
+    <p><strong>{formatCourseDate(session.data.date)}</strong></p>
+    <Content />
+    <SpecList spec={session.data.spec}>
+      What you bring to the session. Written so a reader can tell whether it
+      has been met without asking you.
+    </SpecList>
+    <TeachingTeam teachers={session.data.teachers} />
+    <RelatedContent entry={session} collections={graphCollections} />
+  </Week1Immersion>
 </ContentLayout>
