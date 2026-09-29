@@ -1,8 +1,9 @@
 ---
 title: Idris Fenn
 description:
-  A tutor working across the course's first reviews and the practical work that
-  follows them.
+  Tutor. Teaches weeks 8–12 — the present-day half, covering real
+  governance levers, oversight design, and the open ending — and runs
+  consultation on the dossier assessments.
 affiliation: Slop University School of Invented Disciplines
 role: tutor
 email: idris.fenn@slop.university
@@ -11,7 +12,10 @@ photo: ./idris-fenn.avif
 photoAlt: A stylised portrait of a person facing the viewer, flat gold and black shapes on warm cream, in a two-ink risograph print
 ---
 
-<!-- STARTER_CONTENT: replace this person entry, then remove this comment. -->
+Teaches the present-day half of the course, once the story has moved past
+the takeover — real governance levers, oversight design for present-day AI
+systems, and the open week 12 ending.
 
-Replace this entry. A second person makes the listing, role ordering and
-teacher-reference fields visible before you replace the cast with your own.
+First point of contact for questions about A2's feasibility testing and A3's
+counterargument requirement; Idris does not set or change marking criteria,
+only applies them.

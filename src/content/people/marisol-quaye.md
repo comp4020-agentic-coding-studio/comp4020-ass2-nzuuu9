@@ -1,8 +1,8 @@
 ---
 title: Marisol Quaye
 description:
-  The founding convenor, responsible for the course's shape and its weekly
-  teaching programme.
+  Convenor. Teaches weeks 1–7 (life under CivOp, and the hinge back to the
+  takeover) and sets the course's marking standards.
 affiliation: Slop University School of Invented Disciplines
 role: convenor
 email: marisol.quaye@slop.university
@@ -11,11 +11,10 @@ photo: ./marisol-quaye.avif
 photoAlt: A stylised portrait of a person in three-quarter view, flat gold and black shapes on warm cream, in a two-ink risograph print
 ---
 
-<!-- STARTER_CONTENT: replace this person entry, then remove this comment. -->
+Teaches the far-future half of the course — Meridian as it stands today,
+under CivOp — and delivers the week 7 lecture at the hinge point where the
+story moves back to the takeover itself.
 
-Replace this entry. A people page carries a short bio and whatever a student
-needs in order to contact the right person for the right thing --- and nothing
-that will be stale by week 3.
-
-Consultation hours, contact preferences and the escalation path (who to ask
-first, who to ask when that does not work) are the parts students actually read.
+Consultation: after each Monday session, or by email with a response inside
+two working days. Escalate a marking question to Marisol first; she holds
+the criteria for all three assessments.
