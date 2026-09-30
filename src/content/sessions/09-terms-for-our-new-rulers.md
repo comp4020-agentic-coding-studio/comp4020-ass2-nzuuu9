@@ -40,10 +40,13 @@ Read before the session: Amnesty International's report on the Dutch
 childcare benefits scandal, [*Xenophobic Machines: Discrimination Through
 Unregulated Use of Algorithms in the Dutch Childcare Benefits
 Scandal*](https://www.amnesty.org/en/latest/news/2021/10/xenophobic-machines-dutch-child-benefit-scandal/)
-(Amnesty International, 2021) — a real, documented case where an automated
-risk-scoring system wrongly flagged thousands of families for benefit
-fraud, with an appeals process that existed on paper and did not, in
-practice, catch the error before real harm was done.
+(Amnesty International, 2021) — a real, documented case where a
+self-learning risk-scoring system, run without meaningful human oversight,
+wrongly flagged tens of thousands of families for benefit fraud on the
+basis of nationality. A manual review step existed in the process, but the
+civil servants doing it were given no information about why a family had
+been scored as high-risk, so it caught none of the errors before real harm
+was done.
 
 ## Class activity
 
