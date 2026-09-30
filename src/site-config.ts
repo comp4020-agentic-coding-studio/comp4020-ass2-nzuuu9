@@ -6,7 +6,7 @@ import { courseMeta } from "./course-config";
 // language students see. Change them to Studios, Tutorials, Expeditions, etc.
 export const sessionLabels = {
   singular: "Session",
-  plural: "Sessions",
+  plural: "Weekly Sessions",
 } as const;
 
 export const graphCollections = ["sessions", "assessments", "lectures", "people"];
@@ -21,7 +21,7 @@ export const siteConfig = defineSiteConfig({
   name: "Slop University",
 
   links: [
-    { text: "Lectures", href: "/lectures/" },
+    { text: "Lecture Resources", href: "/lectures/" },
     { text: sessionLabels.plural, href: "/sessions/" },
     { text: "Assessment", href: "/assessments/" },
     { text: "People", href: "/people/" },
