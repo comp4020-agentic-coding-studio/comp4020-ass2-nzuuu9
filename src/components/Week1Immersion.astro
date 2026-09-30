@@ -128,23 +128,25 @@ const { active = false, notice = "" } = Astro.props;
         var root = document.documentElement;
         var TOGGLE_SELECTOR = ".at-footer-theme-toggle";
         var forced = false;
-        var savedTheme = null;
 
-        function applyForced() {
-          savedTheme = root.dataset.theme || "light";
-          root.dataset.theme = "dark";
-          forced = true;
+        // Same resolution the site's own head script uses. Reading it here
+        // directly — rather than trusting `root.dataset.theme` at this exact
+        // moment — means restoring the preference never depends on this
+        // script running after that one during a client-side transition.
+        function resolvePreference() {
+          return (
+            localStorage.getItem("at-theme") ||
+            (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light")
+          );
         }
 
         function release() {
           if (!forced) return;
-          root.dataset.theme = savedTheme;
+          root.dataset.theme = resolvePreference();
           forced = false;
           document.removeEventListener("astro:before-swap", release);
+          document.removeEventListener("click", interceptToggle, { capture: true });
         }
-
-        applyForced();
-        document.addEventListener("astro:before-swap", release, { once: true });
 
         // The footer toggle must stay visible and functional (it's the site's
         // only theme control), but its default handler assumes `data-theme`
@@ -152,19 +154,22 @@ const { active = false, notice = "" } = Astro.props;
         // forced "dark" to localStorage. Intercept the click in the capture
         // phase — before that handler runs — and treat it as "step out of the
         // Week 1 override for this visit" instead, without writing anything.
-        document.addEventListener(
-          "click",
-          function (event) {
-            if (!forced) return;
-            var target = event.target;
-            var toggle = target && target.closest ? target.closest(TOGGLE_SELECTOR) : null;
-            if (!toggle) return;
-            event.preventDefault();
-            event.stopImmediatePropagation();
-            release();
-          },
-          { capture: true },
-        );
+        // Named (not anonymous) so `release` can remove exactly this listener
+        // instead of it accumulating one extra registration per visit.
+        function interceptToggle(event) {
+          if (!forced) return;
+          var target = event.target;
+          var toggle = target && target.closest ? target.closest(TOGGLE_SELECTOR) : null;
+          if (!toggle) return;
+          event.preventDefault();
+          event.stopImmediatePropagation();
+          release();
+        }
+
+        root.dataset.theme = "dark";
+        forced = true;
+        document.addEventListener("astro:before-swap", release, { once: true });
+        document.addEventListener("click", interceptToggle, { capture: true });
       })();
     </script>
   )
