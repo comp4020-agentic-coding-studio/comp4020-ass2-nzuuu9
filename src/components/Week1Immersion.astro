@@ -12,7 +12,7 @@ const { active = false, notice = "" } = Astro.props;
 
 {
   active ? (
-    <div class="week1-immersion" data-theme="dark">
+    <div class="week1-immersion">
       <div class="civop-notice-panel">
         <p class="civop-notice" id="civop-notice">
           {notice}
@@ -21,9 +21,7 @@ const { active = false, notice = "" } = Astro.props;
           Skip animation
         </button>
       </div>
-      <div class="week1-immersion-body">
-        <slot />
-      </div>
+      <slot />
     </div>
   ) : (
     <slot />
@@ -32,11 +30,6 @@ const { active = false, notice = "" } = Astro.props;
 
 <style>
   .week1-immersion {
-    background: var(--at-bg);
-    color: var(--at-text);
-    border: 1px solid var(--at-border);
-    border-radius: var(--at-border-radius);
-    padding: var(--at-spacing-lg);
     margin-block: var(--at-spacing-lg) 0;
   }
 
@@ -75,46 +68,104 @@ const { active = false, notice = "" } = Astro.props;
   }
 </style>
 
-<script>
-  const notice = document.getElementById("civop-notice");
-  const skipButton = document.getElementById("civop-skip");
-  if (notice) {
-    const fullText = notice.textContent ?? "";
-    const seenKey = "week1-notice-seen";
-    const alreadySeen = sessionStorage.getItem(seenKey) === "1";
-    const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+{
+  active && (
+    <script is:inline data-astro-rerun>
+      (function () {
+        var notice = document.getElementById("civop-notice");
+        var skipButton = document.getElementById("civop-skip");
+        if (!notice) return;
+        var fullText = notice.textContent || "";
+        var seenKey = "week1-notice-seen";
+        var alreadySeen = sessionStorage.getItem(seenKey) === "1";
+        var reducedMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    if (alreadySeen || reducedMotion || !fullText) {
-      sessionStorage.setItem(seenKey, "1");
-    } else {
-      sessionStorage.setItem(seenKey, "1");
+        if (alreadySeen || reducedMotion || !fullText) {
+          sessionStorage.setItem(seenKey, "1");
+          return;
+        }
+        sessionStorage.setItem(seenKey, "1");
 
-      // Lock the box height before clearing the text so revealing it back
-      // character-by-character never shifts surrounding layout.
-      notice.style.minHeight = `${notice.getBoundingClientRect().height}px`;
-      // A static label means assistive tech announces the full notice once,
-      // rather than reading each intermediate, partial string as it types.
-      notice.setAttribute("aria-label", fullText);
-      notice.textContent = "";
+        // Lock the box height before clearing the text so revealing it back
+        // character-by-character never shifts surrounding layout.
+        notice.style.minHeight = notice.getBoundingClientRect().height + "px";
+        // A static label means assistive tech announces the full notice once,
+        // rather than reading each intermediate, partial string as it types.
+        notice.setAttribute("aria-label", fullText);
+        notice.textContent = "";
+        if (skipButton) skipButton.hidden = false;
 
-      if (skipButton) {
-        skipButton.hidden = false;
-      }
+        var index = 0;
+        var charsPerTick = 2;
+        var timer = setInterval(function () {
+          index += charsPerTick;
+          notice.textContent = fullText.slice(0, index);
+          if (index >= fullText.length) finish();
+        }, 20);
+        function finish() {
+          clearInterval(timer);
+          notice.textContent = fullText;
+          if (skipButton) skipButton.hidden = true;
+        }
+        if (skipButton) skipButton.addEventListener("click", finish);
+      })();
+    </script>
+  )
+}
 
-      let index = 0;
-      const charsPerTick = 2;
-      const finish = () => {
-        clearInterval(timer);
-        notice.textContent = fullText;
-        if (skipButton) skipButton.hidden = true;
-      };
-      const timer = setInterval(() => {
-        index += charsPerTick;
-        notice.textContent = fullText.slice(0, index);
-        if (index >= fullText.length) finish();
-      }, 20);
+{
+  active && (
+    <script is:inline data-astro-rerun>
+      (function () {
+        // Forces the whole page — header, nav, footer, background, not just
+        // this panel — into the theme's dark palette while Week 1 is open, by
+        // setting the same `data-theme` attribute the site's own toggle uses
+        // (tokens.css resolves every `--at-*` colour from it via `light-dark()`,
+        // and that resolution is inherited, so setting it on <html> covers
+        // everything). It never touches `localStorage["at-theme"]` — that key
+        // is the user's real saved preference, and only the footer toggle's
+        // own handler is allowed to write it.
+        var root = document.documentElement;
+        var TOGGLE_SELECTOR = ".at-footer-theme-toggle";
+        var forced = false;
+        var savedTheme = null;
 
-      skipButton?.addEventListener("click", finish);
-    }
-  }
-</script>
+        function applyForced() {
+          savedTheme = root.dataset.theme || "light";
+          root.dataset.theme = "dark";
+          forced = true;
+        }
+
+        function release() {
+          if (!forced) return;
+          root.dataset.theme = savedTheme;
+          forced = false;
+          document.removeEventListener("astro:before-swap", release);
+        }
+
+        applyForced();
+        document.addEventListener("astro:before-swap", release, { once: true });
+
+        // The footer toggle must stay visible and functional (it's the site's
+        // only theme control), but its default handler assumes `data-theme`
+        // reflects the saved preference and would write the inverse of our
+        // forced "dark" to localStorage. Intercept the click in the capture
+        // phase — before that handler runs — and treat it as "step out of the
+        // Week 1 override for this visit" instead, without writing anything.
+        document.addEventListener(
+          "click",
+          function (event) {
+            if (!forced) return;
+            var target = event.target;
+            var toggle = target && target.closest ? target.closest(TOGGLE_SELECTOR) : null;
+            if (!toggle) return;
+            event.preventDefault();
+            event.stopImmediatePropagation();
+            release();
+          },
+          { capture: true },
+        );
+      })();
+    </script>
+  )
+}
